@@ -36,7 +36,7 @@ public class GetRequest {
 	            // Writing the JSON data to a file
 	            fileWriter = new FileWriter("ExportJson/" + fileName);
 	            fileWriter.write(jsonObject.toString());
-	        } catch (JSONException e) {
+	        	} catch (JSONException e) {
 			    // Handle JSONException
 			    System.out.println("Error: Required fields not found in the response.");
 			} catch (IOException e) {
@@ -46,13 +46,15 @@ public class GetRequest {
 			    // Handle other exceptions
 				System.out.println("Error: An unexpected error occurred.");
 			} finally {
-				try {
-					fileWriter.close();
-				} catch (Exception e) {
-					System.out.println("Something wrong happen");
-				}
-			  }
-    }
+        			if (fileWriter != null) {
+            				try {
+                				fileWriter.close();
+            				} catch (IOException e) {
+                				System.out.println("Error: Unable to close the FileWriter.");
+            				}
+       		 		}
+	 		}
+    	}
 	
 }
 
